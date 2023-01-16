@@ -1,0 +1,49 @@
+type SubmodelElementCollection {
+  metaId: ID!
+  idShort: String
+  version: String
+  revision: String
+  semanticId: String
+  isCaseOf: String
+  assigned: PropertyOrMultiLanguageProperty
+}
+
+union PropertyOrMultiLanguageProperty = Property | MultiLanguageProperty
+
+type Property {
+  metaId: ID!
+  idShort: String
+  version: String
+  revision: String
+  semanticId: String
+  description: String
+  isCaseOf: String
+  valueType: String
+}
+
+type MultiLanguageProperty {
+  metaId: ID!
+  idShort: String
+  version: String
+  revision: String
+  semanticId: String
+  description: String
+  isCaseOf: String
+}
+
+type Submodel {
+  metaId: ID!
+  idShort: String
+  semanticId: String
+  id: String
+  version: String
+  revision: String
+  description: String
+}
+
+type Cardinality {
+  uuid: ID!
+  fromMetaId: ID
+  toMetaId: ID
+  card: String
+}

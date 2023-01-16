@@ -1,0 +1,70 @@
+# Submodel
+type ContactInformations {
+  uuid: ID!
+  metaData: MetaData
+  submodelElement: ContactInformation
+}
+
+# SubmodelElementCollection
+type ContactInformation {
+  uuid: ID!
+  RoleOfContactPerson: String
+  NationalCode: String
+  Language: String 
+  TimeZone: String
+  CityTown: String
+  Company: String
+  Department: String
+  Phone: Phone
+  Fax: Fax
+  Email: Email
+  IPCommunication: IPCommunication
+  Street: String
+  Zipcode: String
+  POBox: String
+  ZipCodeOfPOBox: String
+  StateCounty: String
+  NameOfContact: String
+  FirstName: String
+  MiddleNames: String
+  Title: String
+  AcademicTitle: String
+  FurtherDetailsOfContact: String
+  AddressOfAdditionalLink: String!
+}
+
+# SubmodelElementCollection
+type Phone {
+  uuid: ID!
+  metaData: MetaData
+  TelephoneNumber: String
+  TypeOfTelephone: String
+  AvailableTime: String
+}
+
+# SubmodelElementCollection
+type Fax {
+  uuid: ID!
+  metaData: MetaData
+  FaxNumber: String
+  TypeOfFaxNumber: String
+}
+
+# SubmodelElementCollection
+type Email {
+  uuid: ID!
+  metaData: MetaData
+  EmailAddress: String!
+  PublicKey: String
+  TypeOfEmailAddress: String
+  TypeOfPublicKey: String
+}
+
+# SubmodelElementCollection
+type IPCommunication {
+  uuid: ID!
+  metaData: MetaData
+  AddressOfAdditionalLink: String 
+  TypeOfCommunication: String
+  AvailableTime: String
+}
