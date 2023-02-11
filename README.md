@@ -1,4 +1,4 @@
-**AAS-connect - Die AAS einfach gemacht
+*** AAS-connect - Die AAS einfach gemacht ***
 
 AAS-connect sind GraphQL-Schemen für die Industrie 4.0 Asset Administration Shell. Der Master wird durch eine Community, organisiert von der FoP Consult GmbH, kuratiert.
 Das Masterschema ist eine Ausprägung für die Datenbank Neo4j. Von diesem Master können Ausprägungen für andere Datenbanken abgeleitet und hier im Repository zur allgemeinen freien Verwendung veröffentlicht werden.
