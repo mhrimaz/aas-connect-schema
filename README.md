@@ -5,5 +5,5 @@ AAS-connect sind GraphQL-Schemen für die Industrie 4.0 Asset Administration She
 Weitere Informationen, z.B. zur Spezifikation des GraphQL-Schemas für ein konsistentes Mapping auf die Spezifikationen zur Asset Administration Shell sind unter https://aas-connect.com/ressourcen zu finden. 
 
 Der Master wird durch eine Community, organisiert von der FoP Consult GmbH, kuratiert.
-**Das Masterschema ist eine Ausprägung für die Datenbank Neo4j (Neo4j GraphQL Library).** Von diesem Master können Ausprägungen für andere Datenbanken abgeleitet und hier im Repository zur allgemeinen freien Verwendung veröffentlicht werden.
+**Das Masterschema ist eine Ausprägung für die Datenbank Neo4j (Neo4j GraphQL Library).** Von diesem Master können Ausprägungen für andere Datenbanken abgeleitet und hier im Repository zur allgemeinen freien Verwendung veröffentlicht werden. 
 
