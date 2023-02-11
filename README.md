@@ -1,4 +1,4 @@
-*** AAS-connect - Die AAS einfach gemacht ***
+# AAS-connect - Die AAS einfach gemacht 
 
 AAS-connect sind GraphQL-Schemen für die Industrie 4.0 Asset Administration Shell. AAS-connect ist der einfachste Weg, die Asset Administration Shell spezifikationskonform in Datenbanken zu speichern, zu modifizieren und abzufragen. Hierauf können weitere Services für die AAS aufgebaut werden und sich ein Ökosystem entwickeln. 
 
