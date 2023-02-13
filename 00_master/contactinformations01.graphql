@@ -1,0 +1,103 @@
+# Submodel
+type ContactInformations {
+  dataId: ID!
+  metaData: MetaData
+  submodelElement: [ContactInformation!]!
+}
+
+# SubmodelElementCollection
+type ContactInformation {
+  dataId: ID!
+  metaData: MetaData
+  RoleOfContactPerson: String
+  NationalCode: String
+  Language: String 
+  TimeZone: String
+  CityTown: String
+  Company: String
+  Department: String
+  Phone: Phone
+  Fax: Fax
+  Email: Email
+  IPCommunication: IPCommunication
+  Street: String
+  Zipcode: String
+  POBox: String
+  ZipCodeOfPOBox: String
+  StateCounty: String
+  NameOfContact: String
+  FirstName: String
+  MiddleNames: String
+  Title: String
+  AcademicTitle: String
+  FurtherDetailsOfContact: String
+  AddressOfAdditionalLink: String!
+}
+
+# SubmodelElementCollection
+type Phone {
+  dataId: ID!
+  metaData: MetaData
+  TelephoneNumber: String
+  TypeOfTelephone: String
+  AvailableTime: String
+}
+
+# SubmodelElementCollection
+type Fax {
+  dataId: ID!
+  metaData: MetaData
+  FaxNumber: String
+  TypeOfFaxNumber: String
+}
+
+# SubmodelElementCollection
+type Email {
+  dataId: ID!
+  metaData: MetaData
+  EmailAddress: String!
+  PublicKey: String
+  TypeOfEmailAddress: String
+  TypeOfPublicKey: String
+}
+
+# SubmodelElementCollection
+type IPCommunication {
+  dataId: ID!
+  metaData: MetaData
+  AddressOfAdditionalLink: String 
+  TypeOfCommunication: String
+  AvailableTime: String
+}
+
+type MetaData {
+  metaId: ID!
+  metaType: metaType
+}
+
+enum metaType {
+  # siehe Details of the AAS Part1 Seite 84
+  FragmentReference
+  Referable
+  AnnotatedRelationshipElement
+  BasicEventElement
+  Blob
+  Capability
+  DataElement
+  Entity
+  BasicEventElementFile
+  MultiLanguageProperty
+  Property
+  Operation
+  Range
+  RelationshipElement
+  ReferenceElement
+  SubmodelElement
+  SubmodelElementCollection
+  SubmodelElementList
+  AssetAdministrationShell
+  ConceptDescription
+  Identifiable
+  Submodel
+  GlobalReference
+}
