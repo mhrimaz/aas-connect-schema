@@ -4,7 +4,7 @@ AAS-connect GraphQL-APIs/Schemen für die Industrie 4.0 Asset Administration She
 
 ## AAS-connect Schemen
 
-In diesem Repository finden sie durch die AAS-connect Community bereitgestellte GraphQL-Schemen in der Schema Definition Language (SDL). Weitere Informationen, z.B. zur Spezifikation des GraphQL-Schemas für ein konsistentes Mapping auf die Spezifikationen zur Asset Administration Shell, sind unter https://aas-connect.com/ressourcen zu finden. 
+In diesem Repository finden Sie durch die AAS-connect Community bereitgestellte GraphQL-Schemen in der Schema Definition Language (SDL). Weitere Informationen, z.B. zur Spezifikation des GraphQL-Schemas für ein konsistentes Mapping auf die Spezifikationen zur Asset Administration Shell, sind unter https://aas-connect.com/ressourcen zu finden. 
 
 Der Master wird durch die FoP Consult GmbH kuratiert und in der Community abgestimmt.
 **Das Masterschema ist eine Ausprägung für die Datenbank Neo4j (Neo4j GraphQL Library).** Von diesem Master können Ausprägungen für andere Datenbanken abgeleitet und hier im Repository zur allgemeinen freien Verwendung veröffentlicht werden. 
