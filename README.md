@@ -8,6 +8,8 @@ Der Master wird durch eine Community, organisiert von der FoP Consult GmbH, kura
 **Das Masterschema ist eine Ausprägung für die Datenbank Neo4j (Neo4j GraphQL Library).** Von diesem Master können Ausprägungen für andere Datenbanken abgeleitet und hier im Repository zur allgemeinen freien Verwendung veröffentlicht werden. 
 
 
-# Services / Middleware für Import/Export von AASX-Packages und AASX-Server gemäß Spezifikation Part 2
+
+
+# Services / Middleware für Import/Export von AASX-Packages und Umsetzung AASX-Server gemäß Spezifikation Part 2
 
 Für die Einbindung von GraphQL-APIs für die AAS in das bestehende AAS-Ökosystem können in diesem Repository durch die Community Projekte aufgemacht werden.
