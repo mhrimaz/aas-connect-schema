@@ -12,4 +12,4 @@ Der Master wird durch eine Community, organisiert von der FoP Consult GmbH, kura
 
 # Services / Middleware für Import/Export von AASX-Packages und Umsetzung AASX-Server gemäß Spezifikation Part 2
 
-Für die Einbindung von GraphQL-APIs für die AAS in das bestehende AAS-Ökosystem können in diesem Repository durch die Community Projekte aufgemacht werden.
+Für die Einbindung von GraphQL-APIs für die AAS in das bestehende AAS-Ökosystem können in diesem Repository durch die Community Projekte veröffentlicht werden.
