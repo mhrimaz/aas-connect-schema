@@ -11,7 +11,7 @@ Der Master wird durch die FoP Consult GmbH kuratiert und in der Community abgest
 
 ## AAS-connect Vokabular, Beratung, AAS-Hosting und Tools
 
-Folgende Unternehmen bieten Leistungen für den Ansatz AAS+GraphQL an:
+Folgende Unternehmen bieten Leistungen für AAS-connect an:
 
 - FoP Consult GmbH, Berlin
 
