@@ -1,6 +1,6 @@
-# AAS-connect - Die AAS einfach gemacht 
+# AAS-connect - GraphQL-API für die Asset Administration Shell
 
-AAS-connect GraphQL-APIs/Schemen für die Industrie 4.0 Asset Administration Shell sind der einfachste Weg, die Asset Administration Shell mit Datenbanken, Microservices, REST-APIs oder z.B. Static Object Storages zu realisieren. 
+GraphQL-APIs für die Industrie 4.0 Asset Administration Shell sind der einfachste Weg, die Asset Administration Shell mit Datenbanken, Microservices, REST-APIs oder z.B. Static Object Storages zu realisieren. 
 
 ## AAS-connect Schemen
 
@@ -15,6 +15,6 @@ Folgende Unternehmen bieten Leistungen für den Ansatz AAS+GraphQL an:
 
 - FoP Consult GmbH, Berlin
 
-## Services / Middleware für Import/Export von AASX-Packages und Umsetzung AASX-Server gemäß Spezifikation Part 2
+## Services / Middleware unter Verwendung von AAS-connect
 
-Für die Einbindung von GraphQL-APIs für die AAS in das bestehende AAS-Ökosystem können in diesem Repository durch die Community Projekte veröffentlicht werden.
+Für Services/Middleware, z.B. für den Import/Export von AASX-Packages oder die Umsetzung des AASX-Servers gemäß Spezifikation Part 2, kann hier auf weitere Repositories verlinkt werden.
