@@ -1,1 +1,1 @@
-Dieses Verzeichnis ist zum Beispiel vorgesehen für ein vom Master abgeleitetes Schema für MongoDB (Index 10) mit der Atlas GraphQL API.
+Dieses Verzeichnis ist ein Beispiel für ein vom Master abgeleitetes Schema für die Datenbank/Service "XXX" mit der GraphQL-API "YY" (Index 10).
