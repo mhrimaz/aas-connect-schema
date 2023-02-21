@@ -17,4 +17,4 @@ Folgende Unternehmen bieten Leistungen für AAS-connect an:
 
 ## Services / Middleware unter Verwendung von AAS-connect
 
-Für Services/Middleware, z.B. für den Import/Export von AASX-Packages oder die Umsetzung des AASX-Servers gemäß Spezifikation Part 2, kann hier auf weitere Repositories verlinkt werden.
+Für Services/Middleware, z.B. für den Import/Export von AASX-Packages oder die Umsetzung des AASX-Servers gemäß Spezifikation Part 2, kann hier auf weitere Repositories verlinkt werden. Sprechen Sie uns an!
