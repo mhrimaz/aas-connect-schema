@@ -1,3 +1,4 @@
+Das Masterschema ist für die Verwendung mit Neo4j (Neo4j GraphQL Library) ausgelegt. Vom Masterschema können durch entsprechende Anpassungen Schemen für andere Datenbanken bzw. Services abgeleitet werden.
 
 ## Anwenderdatenschemen
 
