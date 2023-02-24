@@ -1,0 +1,57 @@
+# AAS-connect meta model
+
+type Submodel{
+	metaId: ID!
+	idShort: String
+	semanticId: String
+	subModelId: String
+	version: String
+	revision: String
+	description: String
+    submodelElementCollection: [SubmodelElementCollection!]! @relationship(type: "submodelElementCollection" direction: OUT)
+}
+
+type SubmodelElementCollection{
+	metaId: ID!
+	idShort: String
+	version: String
+	revision: String
+	semanticId: String
+	isCaseOf: String
+	property: [Property!]! @relationship(type: "property" direction: OUT)
+	multiLanguageProperty: [MultiLanguageProperty!]! @relationship(type: "multiLanguageProperty" direction: OUT)
+}
+
+
+# union PropertyOrMultiLanguageProperty = Property | MultiLanguageProperty
+
+type Property{
+	metaId: ID!
+	idShort: String
+	version: String
+	revision: String
+	semanticId: String
+	description: String
+	isCaseOf: String
+	valueType: String
+}
+
+type MultiLanguageProperty{
+	metaId: ID!
+	idShort: String
+	version: String
+	revision: String
+	semanticId: String
+	description: String
+	isCaseOf: String
+}
+
+"""
+Part of aas-connect but not AAS-Specification
+"""
+type Cardinality{
+	uuid: ID!
+	fromMetaId: ID
+	toMetaId: ID
+	card: String
+}
