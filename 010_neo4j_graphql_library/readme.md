@@ -2,7 +2,7 @@ As long as no master schema is definded the master or schema for other databases
 
 ## Basis
 
-metadata and userdata schema without AAS submodels for specification V3.0
+metadata and userdata schema for specification V3.0 without AAS submodels 
 
 aas-basis.gql 
 
