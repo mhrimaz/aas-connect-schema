@@ -1,6 +1,6 @@
 # AAS-connect - GraphQL API for the Asset Administration Shell
 
-GraphQL APIs for the Industrie 4.0 Asset Administration Shell are the easiest way to implement the Asset Administration Shell with databases, microservices, REST APIs or e.g. Static Object Storages. 
+GraphQL APIs for the Industrie 4.0 Asset Administration Shell are in our opinion the easiest way to implement the Asset Administration Shell with databases, microservices, REST APIs or e.g. Static Object Storages. 
 
 ## AAS-connect schemas
 
