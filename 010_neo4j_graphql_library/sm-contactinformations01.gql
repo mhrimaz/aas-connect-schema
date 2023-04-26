@@ -1,0 +1,122 @@
+"""
+To be deleted when applied with basis schema (dublicate)
+"""
+interface Datamodel{
+	dataId: ID! @id
+}
+
+"""
+To be deleted when applied with other submodel schema (dublicate)
+"""
+enum MetaType{
+	FragmentReference
+	Referable
+	AnnotatedRelationshipElement
+	BasicEventElement
+	Blob
+	Capability
+	DataElement
+	Entity
+	BasicEventElementFile
+	MultiLanguageProperty
+	Property
+	Operation
+	Range
+	RelationshipElement
+	ReferenceElement
+	SubmodelElement
+	SubmodelElementCollection
+	SubmodelElementList
+	AssetAdministrationShell
+	ConceptDescription
+	Identifiable
+	Submodel
+	GlobalReference
+}
+
+type ContactInformations implements Datamodel{
+	dataId: ID! @id
+	metaId: String
+	metaType: MetaType
+	contactInformation: [ContactInformation!]! @relationship(
+	type: "submodelElement"
+	direction: OUT
+)
+}
+
+type ContactInformation implements Datamodel{
+	dataId: ID! @id
+	metaId: String
+	metaType: MetaType
+	RoleOfContactPerson: String
+	NationalCode: String
+	Language: String
+	TimeZone: String
+	CityTown: String
+	Company: String
+	Department: String
+	Phone: [Phone!]! @relationship(
+	type: "submodelElement"
+	direction: OUT
+)
+	Fax: [Fax!]! @relationship(
+	type: "submodelElement"
+	direction: OUT
+)
+	Email: [Email!]! @relationship(
+	type: "submodelElement"
+	direction: OUT
+)
+	ipCommunication: [IPCommunication!]! @relationship(
+	type: "submodelElement"
+	direction: OUT
+)
+	Street: String
+	Zipcode: String
+	POBox: String
+	ZipCodeOfPOBox: String
+	StateCounty: String
+	NameOfContact: String
+	FirstName: String
+	MiddleNames: String
+	Title: String
+	AcademicTitle: String
+	FurtherDetailsOfContact: String
+	AddressOfAdditionalLink: String
+}
+
+type Phone implements Datamodel{
+	dataId: ID! @id
+	metaId: String
+	metaType: MetaType
+	TelephoneNumber: String
+	TypeOfTelephone: String
+	AvailableTime: String
+}
+
+type Fax implements Datamodel{
+	dataId: ID! @id
+	metaId: String
+	metaType: MetaType
+	FaxNumber: String
+	TypeOfFaxNumber: String
+}
+
+type Email implements Datamodel{
+	dataId: ID! @id
+	metaId: String
+	metaType: MetaType
+	EmailAddress: String!
+	PublicKey: String
+	TypeOfEmailAddress: String
+	TypeOfPublicKey: String
+}
+
+type IPCommunication implements Datamodel{
+	dataId: ID! @id
+	metaId: String
+	metaType: MetaType
+	AddressOfAdditionalLink: String
+	TypeOfCommunication: String
+	AvailableTime: String
+}
