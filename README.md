@@ -1,20 +1,20 @@
-# AAS-connect - GraphQL-API für die Asset Administration Shell
+# AAS-connect - GraphQL API for the Asset Administration Shell
 
-GraphQL-APIs für die Industrie 4.0 Asset Administration Shell sind der einfachste Weg, die Asset Administration Shell mit Datenbanken, Microservices, REST-APIs oder z.B. Static Object Storages zu realisieren. 
+GraphQL APIs for the Industrie 4.0 Asset Administration Shell are the easiest way to implement the Asset Administration Shell with databases, microservices, REST APIs or e.g. Static Object Storages. 
 
-## AAS-connect Schemen
+## AAS-connect schemas
 
-In diesem Repository finden Sie durch die AAS-connect Community bereitgestellte GraphQL-Schemen in der Schema Definition Language (SDL). Weitere Informationen, z.B. zur Spezifikation des GraphQL-Schemas für ein konsistentes Mapping auf die Spezifikationen zur Asset Administration Shell, sind unter https://aas-connect.com/ressourcen zu finden. 
+In this repository you will find GraphQL schemas in the Schema Definition Language (SDL) provided by FoP Consult GmbH and derived schemas for other services provided by the AAS-connect community. Further information, e.g. on the specification of the GraphQL schema for a consistent mapping to the Asset Administration Shell specifications, can be found at https://aas-connect.com/ressourcen. 
 
-Der Master wird durch die FoP Consult GmbH kuratiert und in der Community abgestimmt.
-**Das Masterschema ist eine Ausprägung für die Datenbank Neo4j (Neo4j GraphQL Library).** Von diesem Master können Ausprägungen für andere Datenbanken abgeleitet und hier im Repository zur allgemeinen freien Verwendung veröffentlicht werden. 
+The neo4j and master schema is curated by FoP Consult GmbH and voted on in the community.
+**The neo4j schema is a specification for the Neo4j database (Neo4j GraphQL Library).** Specifications for other databases can be derived from the master or neo4j schema and published here in the repository for general free use. 
 
-## AAS-connect Vokabular, Beratung, AAS-Hosting und Tools
+## AAS-connect vocabulary, consulting, AAS hosting and tools
 
-Folgende Unternehmen bieten Leistungen für AAS-connect an:
+The following companies provide services for AAS-connect:
 
 - FoP Consult GmbH, Berlin
 
-## Services / Middleware unter Verwendung von AAS-connect
+## Services / Middleware using AAS-connect
 
-Für Services/Middleware, z.B. für den Import/Export von AASX-Packages oder die Umsetzung des AASX-Servers gemäß Spezifikation Part 2, kann hier auf weitere Repositories verlinkt werden. Sprechen Sie uns an!
+Other repositories for services/middleware, e.g. for the import/export of AASX packages to/from a AAS-connect GraphQL-Endpoint can be linked here. Please contact us!
