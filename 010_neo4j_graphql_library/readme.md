@@ -1,11 +1,15 @@
 As long as no master schema is definded the master or schema for other databases/services can be derived from this neo4j schema (Neo4j GraphQL Library). 
 
-## Basis: metadata and userdata schema without AAS submodels for specification V3.0
+## Basis
+
+metadata and userdata schema without AAS submodels for specification V3.0
 
 aas-basis.gql 
 
 
-## Submodels (submodel schema which can be applied according demand as part of the userdata schema)
+## Submodels 
+
+submodel schema which can be applied according demand as part of the userdata schema
 
 sm-contactinformations01.gql - IDTA 02002-1-0 Submodel for Contact Information, 24 May 2022
 
