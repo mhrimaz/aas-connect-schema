@@ -34,7 +34,7 @@ enum MetaType{
 	GlobalReference
 }
 
-type ContactInformations implements Datamodel{
+type ContactInformations implements Datamodel @plural(value: "ContactInformationsMany") {
 	dataId: ID! @id
 	metaId: String
 	metaType: MetaType
@@ -44,7 +44,7 @@ type ContactInformations implements Datamodel{
 )
 }
 
-type ContactInformation implements Datamodel{
+type ContactInformation implements Datamodel @plural(value: "ContactInformationMany") {
 	dataId: ID! @id
 	metaId: String
 	metaType: MetaType
