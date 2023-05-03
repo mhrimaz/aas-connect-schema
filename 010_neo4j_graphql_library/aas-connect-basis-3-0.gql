@@ -1,6 +1,5 @@
 # AAS-connect basis schema = meta and user data schema w/o submodel schema
 
-
 interface Datamodel{
 	dataId: ID! @id
 }
@@ -18,7 +17,7 @@ type AssetAdministrationShell implements Datamodel{
 	revision: String
 	aasId: String
 	displayName: String
-	description: String
+	description_en: String
 	checksum: String
 	assetInformation: [AssetInformation!]! @relationship(
 	type: "assetInformation"
@@ -61,10 +60,10 @@ type Submodel implements Metamodel{
 	metaId: ID! @id
 	idShort: String
 	semanticId: String
-	subModelId: String
+	submodelId: String
 	version: String
 	revision: String
-	description: String
+	description_en: String
 	submodelElementCollection: [SubmodelElementCollection!]! @relationship(
 	type: "submodelElementCollection"
 	direction: OUT
@@ -76,6 +75,7 @@ type SubmodelElementCollection implements Metamodel{
 	idShort: String
 	version: String
 	revision: String
+	description_en: String
 	semanticId: String
 	isCaseOf: String
 	property: [Property!]! @relationship(
@@ -86,6 +86,10 @@ type SubmodelElementCollection implements Metamodel{
 	type: "multiLanguageProperty"
 	direction: OUT
 )
+	submodelElementCollection: [SubmodelElementCollection!]! @relationship(
+	type: "subModelElementCollection"
+	direction: OUT
+)
 }
 
 type Property implements Metamodel{
@@ -94,7 +98,7 @@ type Property implements Metamodel{
 	version: String
 	revision: String
 	semanticId: String
-	description: String
+	description_en: String
 	isCaseOf: String
 	valueType: String
 }
@@ -105,15 +109,25 @@ type MultiLanguageProperty implements Metamodel{
 	version: String
 	revision: String
 	semanticId: String
-	description: String
+	description_en: String
 	isCaseOf: String
+}
+
+enum Card{
+	ZeroToOne
+	ZeroToMany
+	OneToOne
+	OneToMany
+	ManyToOne
+	ManyToMany
 }
 
 """
 Not part of the AAS specification, AAS-connect specific
 """
 type Cardinality{
-	fromMetaId: ID
-	toMetaId: ID
-	card: String
+	id: ID! @id
+	fromIdShort: String
+	toIdShort: String
+	card: Card
 }
