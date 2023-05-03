@@ -48,13 +48,20 @@ type ContactInformation implements Datamodel{
 	dataId: ID! @id
 	metaId: String
 	metaType: MetaType
-	RoleOfContactPerson: String
-	NationalCode: String
-	Language: String
-	TimeZone: String
-	CityTown: String
-	Company: String
-	Department: String
+	RoleOfContactPerson_val: String
+	RoleOfContactPerson_vId: String
+	NationalCode_val: String
+	NationalCode_vId: String
+	Language_val: String
+	Language_vId: String
+	TimeZone_val: String
+	TimeZone_vId: String
+	CityTown_val: String
+	CityTown_vId: String
+	Company_val: String
+	Company_vId: String
+	Department_val: String
+	Department_vId: String
 	Phone: [Phone!]! @relationship(
 	type: "submodelElement"
 	direction: OUT
@@ -71,52 +78,77 @@ type ContactInformation implements Datamodel{
 	type: "submodelElement"
 	direction: OUT
 )
-	Street: String
-	Zipcode: String
-	POBox: String
-	ZipCodeOfPOBox: String
-	StateCounty: String
-	NameOfContact: String
-	FirstName: String
-	MiddleNames: String
-	Title: String
-	AcademicTitle: String
-	FurtherDetailsOfContact: String
-	AddressOfAdditionalLink: String
+	Street_val: String
+	Street_vId: String
+	Zipcode_val: String
+	Zipcode_vId: String
+	POBox_val: String
+	POBox_vId: String
+	ZipCodeOfPOBox_val: String
+	ZipCodeOfPOBox_vId: String
+	StateCounty_val: String
+	StateCounty_vId: String
+	NameOfContact_val: String
+	NameOfContact_vId: String
+	FirstName_val: String
+	FirstName_vId: String
+	MiddleNames_val: String
+	MiddleNames_vId: String
+	Title_val: String
+	Title_vId: String
+	AcademicTitle_val: String
+	AcademicTitle_vId: String
+	FurtherDetailsOfContact_val: String
+	FurtherDetailsOfContact_vId: String
+	AddressOfAdditionalLink_val: String
+	AddressOfAdditionalLink_vId: String
 }
 
 type Phone implements Datamodel{
 	dataId: ID! @id
 	metaId: String
 	metaType: MetaType
-	TelephoneNumber: String
-	TypeOfTelephone: String
-	AvailableTime: String
+	TelephoneNumber_val: String
+	TelephoneNumber_vId: String
+	TypeOfTelephone_val: String
+	TypeOfTelephone_vId: String
+	AvailableTime_val: String
+	AvailableTime_vId: String
 }
 
 type Fax implements Datamodel{
 	dataId: ID! @id
 	metaId: String
 	metaType: MetaType
-	FaxNumber: String
-	TypeOfFaxNumber: String
+	FaxNumber_val: String
+	FaxNumber_vId: String
+	TypeOfFaxNumber_val: String
+	TypeOfFaxNumber_vId: String
 }
 
 type Email implements Datamodel{
 	dataId: ID! @id
 	metaId: String
 	metaType: MetaType
-	EmailAddress: String!
-	PublicKey: String
-	TypeOfEmailAddress: String
-	TypeOfPublicKey: String
+	EmailAddress_val: String
+	EmailAddress_vId: String
+	PublicKey_val: String
+	PublicKey_vId: String
+	TypeOfEmailAddress_val: String
+	TypeOfEmailAddress_vId: String
+	TypeOfPublicKey_val: String
+	TypeOfPublicKey_vId: String
 }
 
 type IPCommunication implements Datamodel{
 	dataId: ID! @id
 	metaId: String
 	metaType: MetaType
-	AddressOfAdditionalLink: String
-	TypeOfCommunication: String
-	AvailableTime: String
+	AddressOfAdditionalLink_val: String
+	AddressOfAdditionalLink_vId: String
+	TypeOfCommunication_val: String
+	TypeOfCommunication_vId: String
+	AvailableTime_val: String
+	AvailableTime_vId: String
 }
+
