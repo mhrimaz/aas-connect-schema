@@ -1,3 +1,5 @@
+# General Guideline
+Best practices mentioned here: https://www.moesif.com/blog/api-guide/graphql-best-practices-resources-and-design-patterns/
 
 # Schema Types
 
