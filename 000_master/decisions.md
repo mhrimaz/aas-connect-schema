@@ -7,6 +7,10 @@ Best practices mentioned here: https://www.moesif.com/blog/api-guide/graphql-bes
 
 ![image](https://github.com/mhrimaz/aas-connect-schema/assets/17963017/13699bf2-f7e5-475d-91c5-0819d3bb6849)
 
+## Limitations
+
+it is not possible that an interface extend another interface, but anyway, you need to repeat the definitions:
+https://discuss.dgraph.io/t/can-interfaces-implement-other-interfaces-in-graphql/10013/4
 
 
 # Query
