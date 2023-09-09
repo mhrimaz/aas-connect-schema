@@ -18,6 +18,10 @@ however `SubmodelElement` is actually an interface so
 
 `interface SubmodelElement` and we repeat the definitions.
 
+### Category
+
+Category should be enum, but in json schema it is String. We also did it by using string, it is a deprecated value so no one sould use it.
+
 # Query
 
 - How should be the interaction? It can mimic the REST api endpoints, or be GraphQL style? How should be the naming convention?
