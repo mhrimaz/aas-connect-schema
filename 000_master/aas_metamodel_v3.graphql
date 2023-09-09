@@ -1,9 +1,21 @@
-# Authors: Mohammad Hossein Rimaz
-# TODO: Submodel, Asset Administation Shell, and related component
+# Authors: Mohammad Hossein Rimaz, Rico Schady
+# Licence: MIT
+
 
 enum ReferenceTypes{
 	ExternalReference
 	ModelReference
+}
+
+enum ModellingKind{
+	Instance
+	Template
+}
+
+enum QualifierKind{
+	ConceptQualifier
+	TemplateQualifier
+	ValueQualifier
 }
 
 enum KeyTypes{
@@ -88,6 +100,26 @@ enum ModelType{
 	SubmodelElementList
 }
 
+enum AasSubmodelElements{
+	AnnotatedRelationshipElement
+	BasicEventElement
+	Blob
+	Capability
+	DataElement
+	Entity
+	EventElement
+	File
+	MultiLanguageProperty
+	Operation
+	Property
+	Range
+	ReferenceElement
+	RelationshipElement
+	SubmodelElement
+	SubmodelElementCollection
+	SubmodelElementList
+}
+
 enum DataTypeIec61360{
 	BLOB
 	BOOLEAN
@@ -108,6 +140,25 @@ enum DataTypeIec61360{
 	STRING_TRANSLATABLE
 	TIME
 	TIMESTAMP
+}
+
+enum AssetKind{
+	Type
+	Instance
+	NotApplicable
+}
+
+enum EntityType{
+	CoManagedEntity
+	SelfManagedEntity
+}
+enum Direction{
+	input
+	output
+}
+enum StateOfEvent{
+	off
+	on
 }
 
 interface AbstractLangString{
@@ -138,29 +189,28 @@ type Reference{
 
 interface HasSemantics{
 	semanticId: Reference
-	supplementalSemanticIds: [Reference!]!
+	supplementalSemanticIds: [Reference!]
 }
 
 type Extension implements HasSemantics{
 	name: String!
 	valueType: DataTypeDefXsd
 	value: String
-	refersTo: [Reference!]!
+	refersTo: [Reference!]
 	semanticId: Reference
-	supplementalSemanticIds: [Reference!]!
+	supplementalSemanticIds: [Reference!]
 }
 
 interface HasExtensions{
-	extensions: [Extension!]!
+	extensions: [Extension!]
 }
 
-type Referable implements HasExtensions{
+interface Referable{
 	category: String
 	idShort: String
 	displayName: [LangStringNameType!]
 	description: [LangStringTextType!]
-	modelType: ModelType!
-	extensions: [Extension!]!
+	extensions: [Extension!]
 }
 
 type LangStringPreferredNameTypeIec61360 implements AbstractLangString{
@@ -196,11 +246,11 @@ type ValueList{
 
 type DataSpecificationIec61360{
 	preferredName: [LangStringPreferredNameTypeIec61360!]!
-	shortName: [LangStringShortNameTypeIec61360!]!
+	shortName: [LangStringShortNameTypeIec61360!]
 	unit: String
 	unitId: String
 	dataType: DataTypeIec61360
-	definition: [LangStringDefinitionTypeIec61360!]!
+	definition: [LangStringDefinitionTypeIec61360!]
 	valueFormat: String
 	valueList: ValueList
 	value: String
@@ -230,11 +280,6 @@ interface Identifiable{
 	administration: AdministrativeInformation
 }
 
-enum AssetKind{
-	Type
-	Instance
-	NotApplicable
-}
 
 type ConceptDescription implements Identifiable & HasDataSpecification{
 	id: String!
@@ -243,3 +288,350 @@ type ConceptDescription implements Identifiable & HasDataSpecification{
 	isCaseOf: [Reference!]
 	modelType: ModelType!
 }
+
+
+type SpecificAssetId implements HasSemantics{
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	name: String!
+	value: String!
+	externalSubjectId: Reference
+}
+
+type Resource{
+	path: String!
+	contentType: String
+}
+
+type AssetInformation{
+	assetKind: AssetKind
+	globalAssetId: String
+	specificAssetIds: [SpecificAssetId!]
+	assetType: String
+	defaultThumbnail: Resource
+}
+
+type AssetAdministrationShell implements Identifiable & HasDataSpecification{
+	id: String!
+	extensions: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	administration: AdministrativeInformation
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+	derivedFrom: Reference
+	assetInformation: AssetInformation
+	submodels: [Reference!]
+	modelType: ModelType!
+}
+
+type Qualifier implements HasSemantics{
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	kind: QualifierKind
+	type: String!
+	valueType: DataTypeDefXsd!
+	value: String
+	valueId: Reference
+}
+
+interface Qualifiable{
+	qualifiers: [Qualifier!]
+}
+interface SubmodelElement{
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+interface DataElement {
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+interface HasKind{
+    kind: ModellingKind
+}
+
+
+type Submodel implements Identifiable & HasKind & HasSemantics & Qualifiable & HasDataSpecification{
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	administration: AdministrativeInformation
+	id: String!
+	kind: ModellingKind
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+	submodelElements: [SubmodelElement!]
+}
+
+
+type Blob implements DataElement{
+	value: String
+	contentType: String!
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type File implements DataElement{
+	value: String
+	contentType: String!
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type Property implements DataElement{
+	valueType: DataTypeDefXsd!
+	value: String
+	valueId: Reference
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type Range implements DataElement{
+	valueType: DataTypeDefXsd!
+	min: String
+	max: String
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type ReferenceElement implements DataElement{
+	value: Reference
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type MultiLanguageProperty implements DataElement{
+	value: LangStringTextType
+	valueId: Reference
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type RelationshipElement implements SubmodelElement{
+	first: Reference
+	second: Reference
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type AnnotatedRelationshipElement implements SubmodelElement{
+	annotation: [DataElement]
+	first: Reference
+	second: Reference
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type Capability implements SubmodelElement{
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type SubmodelElementList implements SubmodelElement{
+	orderRelevant: Boolean
+	semanticIdListElement: Reference
+	typeValueListElement: AasSubmodelElements
+	valueTypeListElement: DataTypeDefXsd
+	value: [SubmodelElement!]
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type SubmodelElementCollection implements SubmodelElement{
+	value: [SubmodelElement!]
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type Entity implements SubmodelElement{
+	statements: [SubmodelElement!]
+	entityType: EntityType!
+	globalAssetId: String
+	specificAssetIds: [SpecificAssetId!]
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type EventElement implements SubmodelElement{
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type BasicEventElement implements SubmodelElement{
+	observed: Reference!
+	direction: Direction!
+	state: StateOfEvent!
+	messageTopic: String
+	messageBroker: Reference
+	lastUpdate: String
+	minInterval: String
+	maxInterval: String
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type OperationVariable implements SubmodelElement{
+	value: SubmodelElement
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
+type Operation implements SubmodelElement{
+	inputVariable: [OperationVariable!]
+	outputVariable: [OperationVariable!]
+	inoutputVariable: [OperationVariable!]
+	extensions: [Extension!]
+	category: String
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	modelType: ModelType!
+	semanticId: Reference
+	supplementalSemanticIds: [Reference!]
+	qualifiers: [Qualifier!]
+	embeddedDataSpecifications: [EmbeddedDataSpecification!]
+}
+
