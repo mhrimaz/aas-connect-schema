@@ -9,9 +9,14 @@ Best practices mentioned here: https://www.moesif.com/blog/api-guide/graphql-bes
 
 ## Limitations
 
-it is not possible that an interface extend another interface, but anyway, you need to repeat the definitions:
+it is not possible that an interface extend another interface, but anyway, you need to repeat the definitions.
 https://discuss.dgraph.io/t/can-interfaces-implement-other-interfaces-in-graphql/10013/4
 
+so instead of `interface SubmodelElement implements Referable & HasSemantics & Qualifiable & HasDataSpecification`
+it is possible to have `type SubmodelElement implements Referable & HasSemantics & Qualifiable & HasDataSpecification`
+however `SubmodelElement` is actually an interface so
+
+`interface SubmodelElement` and we repeat the definitions.
 
 # Query
 
