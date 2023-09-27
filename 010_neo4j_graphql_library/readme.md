@@ -1,3 +1,9 @@
+## AAS-connect complete Schema 
+
+AAS-connect metadata and userdata schema for AAS specification V3.0 with AAS submodels 
+
+aas-connect-complete-3-0.gql 
+
 
 ## AAS-connect Basis Schema
 
