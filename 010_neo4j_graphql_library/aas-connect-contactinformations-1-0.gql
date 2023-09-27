@@ -1,13 +1,50 @@
-"""
-To be deleted when applied with basis schema (dublicate)
-"""
+# AAS-connect complete GraphQL Schema
+
 interface Datamodel{
 	dataId: ID! @id
 }
 
+interface Metamodel{
+	metaId: ID! @id
+}
+
 """
-To be deleted when applied with other submodel schema (dublicate)
+Please reference to submodels as required here
 """
+type AssetAdministrationShell implements Datamodel{
+	idShort: String
+	version: String
+	revision: String
+	aasId: String
+	displayName: String
+	description_en: String
+	checksum: String
+	assetInformation: [AssetInformation!]! @relationship(
+	type: "assetInformation"
+	direction: OUT
+)
+	dataId: ID! @id
+	contactInformations: [ContactInformations!]! @relationship(
+	type: "submodel"
+	direction: OUT
+)
+}
+
+type AssetInformation implements Datamodel{
+	dataId: ID! @id
+	assetKind: AssetKind
+	globalAssetId: String!
+	specificAssetId: [SpecificAssetId!]! @relationship(
+	type: "specificAssetId"
+	direction: OUT
+)
+}
+
+enum AssetKind{
+	Type
+	Instance
+}
+
 enum MetaType{
 	FragmentReference
 	Referable
@@ -34,7 +71,101 @@ enum MetaType{
 	GlobalReference
 }
 
-type ContactInformations implements Datamodel @plural(value: "ContactInformationsMany") {
+type SpecificAssetId implements Datamodel{
+	dataId: ID! @id
+	name: String
+	value: String
+}
+
+
+"""
+Not part of the AAS specification, AAS-connect specific
+"""
+type Counter{
+	fromDataId: String!
+	toDataId: String!
+	counter: String
+}
+
+type Submodel implements Metamodel{
+	metaId: ID! @id
+	idShort: String
+	semanticId: String
+	submodelId: String
+	version: String
+	revision: String
+	description_en: String
+	submodelElementCollection: [SubmodelElementCollection!]! @relationship(
+	type: "submodelElementCollection"
+	direction: OUT
+)
+}
+
+type SubmodelElementCollection implements Metamodel{
+	metaId: ID! @id
+	idShort: String
+	version: String
+	revision: String
+	description_en: String
+	semanticId: String
+	isCaseOf: String
+	property: [Property!]! @relationship(
+	type: "property"
+	direction: OUT
+)
+	multiLanguageProperty: [MultiLanguageProperty!]! @relationship(
+	type: "multiLanguageProperty"
+	direction: OUT
+)
+	submodelElementCollection: [SubmodelElementCollection!]! @relationship(
+	type: "subModelElementCollection"
+	direction: OUT
+)
+}
+
+type Property implements Metamodel{
+	metaId: ID! @id
+	idShort: String
+	version: String
+	revision: String
+	semanticId: String
+	description_en: String
+	isCaseOf: String
+	valueType: String
+}
+
+type MultiLanguageProperty implements Metamodel{
+	metaId: ID! @id
+	idShort: String
+	version: String
+	revision: String
+	semanticId: String
+	description_en: String
+	isCaseOf: String
+}
+
+enum Card{
+	ZeroToOne
+	ZeroToMany
+	OneToOne
+	OneToMany
+	ManyToOne
+	ManyToMany
+}
+
+"""
+Not part of the AAS specification, AAS-connect specific
+"""
+type Cardinality{
+	id: ID! @id
+	fromIdShort: String
+	toIdShort: String
+	card: Card
+}
+
+type ContactInformations implements Datamodel @plural(
+	value: "ContactInformationsMany"
+){
 	dataId: ID! @id
 	metaId: String
 	metaType: MetaType
@@ -44,7 +175,9 @@ type ContactInformations implements Datamodel @plural(value: "ContactInformation
 )
 }
 
-type ContactInformation implements Datamodel @plural(value: "ContactInformationMany") {
+type ContactInformation implements Datamodel @plural(
+	value: "ContactInformationMany"
+){
 	dataId: ID! @id
 	metaId: String
 	metaType: MetaType
@@ -151,4 +284,5 @@ type IPCommunication implements Datamodel{
 	AvailableTime_val: String
 	AvailableTime_vId: String
 }
+
 
