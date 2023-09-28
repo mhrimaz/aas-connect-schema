@@ -43,6 +43,7 @@ type AssetInformation implements Datamodel{
 enum AssetKind{
 	Type
 	Instance
+	NotApplicable
 }
 
 enum MetaType{
