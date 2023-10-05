@@ -1,1 +1,1 @@
-The folder acts as a template for a schema derived from the neo4j or master schema. XXX stands as index for a database/service whereas YYY stands for the name of the database/service and ZZZ for the library.
+The folder acts as a template for a schema derived from the AAS-connect master schema. XXX stands as index for a database/service whereas YYY stands for the name of the database/service and ZZZ for the library.
