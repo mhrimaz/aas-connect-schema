@@ -2,13 +2,16 @@
 
 GraphQL APIs for the Industrie 4.0 Asset Administration Shell (AAS) are in our opinion the easiest way to implement the Asset Administration Shell within your company's software landscape and to reduce integration efforts.  
 
-## AAS-connect Schemas
+## AAS-connect schemas for different databases
 
-In this repository you will find GraphQL schemas for the AAS in the Schema Definition Language (SDL). The master schema and the neo4j schema are developed by FoP Consult GmbH. For feedback please create issues in this repository. The master schema is a pure GQL schema according to the GraphQL Specification without directives. The neo4j schema can be implemented with the graph database Neo4j using the Neo4j GraphQL Library. Further information, e.g. on the specification of AAS-connect for a consistent mapping to the Asset Administration Shell specifications, can be found at https://aas-connect.com/aas-connect-schema. 
+In this repository you will find different variants of the AAS-connect schema in the Schema Definition Language (SDL). The master schema and the neo4j schema are developed by FoP Consult GmbH. The master schema is a pure GQL schema according to the GraphQL Specification without directives. The neo4j schema can be implemented with the graph database Neo4j using the Neo4j GraphQL Library. For feedback please create issues in this repository. 
 
 Specifications for other databases can be derived from the master schema and published here in the repository for general free use by the community. 
 
-## Tools and services AAS-connect
+Further information, e.g. on the specification of AAS-connect for a consistent mapping to the Asset Administration Shell specifications, can be found at https://aas-connect.com/aas-connect-schema. 
+
+
+## Tools and services for AAS-connect
 
 The following companies provide support for AAS-connect:
 
