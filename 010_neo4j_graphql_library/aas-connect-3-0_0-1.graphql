@@ -1,0 +1,675 @@
+# ===============================================================================================================
+# AAS-connect 
+# is a GraphQL Reference Schema for the Asset Administration Shell
+# according AAS Metamodel Specification 
+# IDTA specification document: IDTA 01001-3-0
+# ---------------------------------------------------------------------------------------------------------------
+# Library: Neo4j/Neo4j GraphQL Library 
+# ---------------------------------------------------------------------------------------------------------------
+# Specification of AAS-connet: https://www.aas-connect.com/gql-schema
+# GitHub repository: https://github.com/foprs/aas-connect-schema
+# ---------------------------------------------------------------------------------------------------------------
+# Version: 0-1 (Tested and modeled for some of the model elements needed for SMT "ContactInformations")
+# Author: FoP Consult GmbH, Dr.-Ing. Rico Schady
+# Licence: CC-BY-4.0 license
+# ---------------------------------------------------------------------------------------------------------------
+# Comments:
+# - Cardinality for relationsships in Neo4j schema allways [x!]!
+# - Counter, so far for SmcData
+# ---------------------------------------------------------------------------------------------------------------
+
+
+
+# --- User Data Model ---
+
+type SubmodelInstance{
+	dataId: ID! @id
+	submodelId: String
+	metaId: String
+	idShort: String
+	smcData: [SmcData!]! @relationship(type: "smcData" direction: OUT)
+    hasTemplate: [SubmodelTemplate!]! @relationship(type: "hasTemplate" direction: OUT)
+}
+
+type SmcData {	
+    dataId: ID! @id
+	metaId: String
+	idShort: String
+	counter: Int
+	propData: [PropData!]! @relationship(type: "propData" direction: OUT)
+    metadata: [SubmodelElementCollection!]! @relationship(type: "hasMetadata" direction: OUT)
+}
+
+type PropData {
+    dataId: ID! @id
+	metaId: String
+	idShort: String
+	value: String
+	valueId: [Reference!]! @relationship(type: "valueId" direction: OUT)
+    metadata: [Property!]! @relationship(type: "hasMetadata" direction: OUT)
+}
+
+type Cardinality{
+	metaId: ID! @id
+	fromSubmodelElement: [SubmodelElement!]! @relationship(type: "fromSubmodelElement" direction: OUT) 
+	toSubmodelElement: [SubmodelElement!]! @relationship(type: "toSubmodelElement" direction: IN) 
+	cardinality: CardEnums
+}
+
+enum CardEnums{
+	One
+	ZeroToOne
+	ZeroToMany
+	OneToMany
+}
+
+type AssetAdministrationShell implements Identifiable & HasDataSpecification{
+	dataId: ID! @id
+	aId: String
+	extension: [Extension!]! @relationship(type: "extension" direction: OUT) 
+	idShort: String
+    administration: [AdministrativeInformation!]! @relationship(type: "administration" direction: OUT)    
+	displayName: [LangStringNameType!]! @relationship(type: "displayName" direction: OUT)
+	description: [LangStringTextType!]! @relationship(type: "description" direction: OUT)
+	embeddedDataSpecification: [EmbeddedDataSpecification!]! @relationship(type: "embeddedDataSpecification" direction: OUT)
+	derivedFrom: [Reference!]! @relationship(type: "derivedFrom" direction: OUT)
+	assetInformation: [AssetInformation!]! @relationship(type: "assetInformation" direction: OUT)
+#	submodel: [Reference!]! @relationship(type: "submodel" direction: OUT)
+#	--- Start AAS-connect specific ---
+	submodelInstance: [SubmodelInstance!]! @relationship(type: "submodelInstance" direction: OUT)
+#	--- End AAS-connect specific ---
+}
+
+type AdministrativeInformation implements HasDataSpecification{
+	dataId: ID! @id
+	version: String
+	revision: String
+	creator: [Reference!]! @relationship(type: "creator" direction: OUT)
+	embeddedDataSpecification: [EmbeddedDataSpecification!]! @relationship(type: "embeddedDataSpecification" direction: OUT)
+}
+
+type AssetInformation{
+	dataId: ID! @id
+	assetKind: AssetKind
+	globalAssetId: String
+	specificAssetId: [SpecificAssetId!]! @relationship(type: "specificAssetId" direction: OUT)
+	assetType: String
+	defaultThumbnail: Resource
+}
+
+
+# --- Meta data model ---
+
+enum ReferenceTypes{
+	ExternalReference
+	ModelReference
+}
+
+enum ModellingKind{
+#	Instance
+	Template
+}
+
+enum QualifierKind{
+	ConceptQualifier
+	TemplateQualifier
+	ValueQualifier
+}
+
+enum KeyTypes{
+	AnnotatedRelationshipElement
+	AssetAdministrationShell
+	BasicEventElement
+	Blob
+	Capability
+	ConceptDescription
+	DataElement
+	Entity
+	EventElement
+	File
+	FragmentReference
+	GlobalReference
+	Identifiable
+	MultiLanguageProperty
+	Operation
+	Property
+	Range
+	Referable
+	ReferenceElement
+	RelationshipElement
+	Submodel
+	SubmodelElement
+	SubmodelElementCollection
+	SubmodelElementList
+}
+
+enum DataTypeDefXsd{
+	xs_anyURI
+	xs_base64Binary
+	xs_boolean
+	xs_byte
+	xs_date
+	xs_dateTime
+	xs_decimal
+	xs_double
+	xs_duration
+	xs_float
+	xs_gDay
+	xs_gMonth
+	xs_gMonthDay
+	xs_gYear
+	xs_gYearMonth
+	xs_hexBinary
+	xs_int
+	xs_integer
+	xs_long
+	xs_negativeInteger
+	xs_nonNegativeInteger
+	xs_nonPositiveInteger
+	xs_positiveInteger
+	xs_short
+	xs_string
+	xs_time
+	xs_unsignedByte
+	xs_unsignedInt
+	xs_unsignedLong
+	xs_unsignedShort
+}
+
+enum AasSubmodelElements{
+	AnnotatedRelationshipElement
+	BasicEventElement
+	Blob
+	Capability
+	DataElement
+	Entity
+	EventElement
+	File
+	MultiLanguageProperty
+	Operation
+	Property
+	Range
+	ReferenceElement
+	RelationshipElement
+	SubmodelElement
+	SubmodelElementCollection
+	SubmodelElementList
+}
+
+enum DataTypeIec61360{
+	BLOB
+	BOOLEAN
+	DATE
+	FILE
+	HTML
+	INTEGER_COUNT
+	INTEGER_CURRENCY
+	INTEGER_MEASURE
+	IRDI
+	IRI
+	RATIONAL
+	RATIONAL_MEASURE
+	REAL_COUNT
+	REAL_CURRENCY
+	REAL_MEASURE
+	STRING
+	STRING_TRANSLATABLE
+	TIME
+	TIMESTAMP
+}
+
+enum AssetKind{
+	Type
+	Instance
+	NotApplicable
+}
+
+enum EntityType{
+	CoManagedEntity
+	SelfManagedEntity
+}
+
+# Has been commented out due to 'direction' in relationship
+# enum Direction{
+#	input
+#	output
+#}
+
+enum StateOfEvent{
+	off
+	on
+}
+
+interface AbstractLangString{
+	language: String!
+	text: String!
+}
+
+type LangStringNameType implements AbstractLangString{
+	metaId: ID! @id
+	language: String!
+	text: String!
+}
+
+type LangStringTextType implements AbstractLangString{
+	metaId: ID! @id
+	language: String!
+	text: String!
+}
+
+type Key{
+	metaId: ID! @id
+	type: KeyTypes
+	value: String!
+}
+
+type Reference{
+	metaId: ID! @id
+	type: ReferenceTypes!
+	key: [Key!]! @relationship(type: "key" direction: OUT)
+	referredSemanticId: Reference @relationship(type: "referredSemanticId" direction: OUT)
+}
+
+interface HasSemantics{
+	semanticId: Reference 
+	supplementalSemanticId: [Reference!]
+}
+
+type Extension implements HasSemantics{
+	metaId: ID! @id
+	name: String!
+	valueType: DataTypeDefXsd
+	value: String
+	refersTo: [Reference!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+}
+
+interface HasExtensions{
+	extension: [Extension!]
+}
+
+interface Referable{
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	extension: [Extension!]
+}
+
+type LangStringPreferredNameTypeIec61360 implements AbstractLangString{
+	metaId: ID! @id
+	language: String!
+	text: String!
+}
+
+type LangStringShortNameTypeIec61360 implements AbstractLangString{
+	metaId: ID! @id
+	language: String!
+	text: String!
+}
+
+type LangStringDefinitionTypeIec61360 implements AbstractLangString{
+	metaId: ID! @id
+	language: String!
+	text: String!
+}
+
+type LevelType{
+	metaId: ID! @id
+	min: Boolean
+	nom: Boolean
+	typ: Boolean
+	max: Boolean
+}
+
+type ValueReferencePair{
+	metaId: ID! @id
+	value: String
+	valueId: Reference
+}
+
+type ValueList{
+	metaId: ID! @id
+	valueReferencePair: [ValueReferencePair!]!
+}
+
+type DataSpecificationIec61360{
+	metaId: ID! @id
+	preferredName: [LangStringPreferredNameTypeIec61360!]!
+	shortName: [LangStringShortNameTypeIec61360!]
+	unit: String
+	unitId: String
+	dataType: DataTypeIec61360
+	definition: [LangStringDefinitionTypeIec61360!]
+	valueFormat: String
+	valueList: ValueList
+	value: String
+	levelType: LevelType
+}
+
+type EmbeddedDataSpecification{
+	metaId: ID! @id
+	dataSpecification: Reference
+	dataSpecificationContent: DataSpecificationIec61360
+}
+
+interface HasDataSpecification{
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+interface Identifiable{
+	aId: String
+	administration: [AdministrativeInformation!]
+}
+
+type ConceptDescription implements Identifiable & HasDataSpecification{
+	metaId: ID! @id
+	aId: String
+	administration: [AdministrativeInformation!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+	isCaseOf: [Reference!]! @relationship(type: "isCaseOf" direction: OUT)
+}
+
+type SpecificAssetId implements HasSemantics{
+	metaId: ID! @id
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]! @relationship(type: "supplementalSemanticId" direction: OUT)
+	name: String!
+	value: String!
+	externalSubjectId: Reference
+}
+
+type Resource{
+	metaId: ID! @id
+	path: String!
+	contentType: String
+}
+
+type Qualifier implements HasSemantics{
+	metaId: ID! @id
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]! @relationship(type: "supplementalSemanticId" direction: OUT)
+	kind: QualifierKind
+	type: String!
+	valueType: DataTypeDefXsd!
+	value: String
+	valueId: Reference
+}
+
+interface Qualifiable{
+	qualifier: [Qualifier!]
+}
+
+interface SubmodelElement{
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+interface DataElement {
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+interface HasKind{
+    kind: ModellingKind
+}
+
+type SubmodelTemplate implements Identifiable & HasKind & HasSemantics & Qualifiable & HasDataSpecification{
+	metaId: ID! @id
+    extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	administration: [AdministrativeInformation!]
+	aId: String
+	kind: ModellingKind
+	semanticId: Reference @relationship(type: "semanticId" direction: OUT)
+	supplementalSemanticId: [Reference!]! @relationship(type: "supplementalSemanticId" direction: OUT)
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+	submodelElement: [SubmodelElement!]! @relationship(type: "submodelElement" direction: OUT) 
+}
+
+type Blob implements DataElement & SubmodelElement{
+	metaId: ID! @id
+	value: String
+	contentType: String!
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type File implements DataElement & SubmodelElement{
+	metaId: ID! @id
+	value: String
+	contentType: String!
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type Property implements DataElement & SubmodelElement{
+	metaId: ID! @id
+	valueType: DataTypeDefXsd!
+#	value: String
+#	valueId: Reference
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type Range implements DataElement & SubmodelElement{
+	metaId: ID! @id
+	valueType: DataTypeDefXsd!
+	min: String
+	max: String
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type ReferenceElement implements DataElement & SubmodelElement{
+	metaId: ID! @id
+	value: Reference
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type MultiLanguageProperty implements DataElement & SubmodelElement{
+	metaId: ID! @id
+	value: LangStringTextType
+	valueId: Reference
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type RelationshipElement implements SubmodelElement{
+	metaId: ID! @id
+	first: Reference
+	second: Reference
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type AnnotatedRelationshipElement implements SubmodelElement{
+	metaId: ID! @id 
+	annotation: [DataElement]
+	first: Reference
+	second: Reference
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type Capability implements SubmodelElement{
+	metaId: ID! @id
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type SubmodelElementList implements SubmodelElement{
+	metaId: ID! @id
+	orderRelevant: Boolean
+	semanticIdListElement: Reference
+	typeValueListElement: AasSubmodelElements
+	valueTypeListElement: DataTypeDefXsd
+	value: [SubmodelElement!]
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type SubmodelElementCollection implements SubmodelElement{
+	metaId: ID! @id
+	value: [SubmodelElement!]! @relationship(type: "value" direction: OUT) 
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]! @relationship(type: "description" direction: OUT) 
+	semanticId: Reference @relationship(type: "semanticId" direction: OUT)
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]! @relationship(type: "qualifier" direction: OUT)
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type Entity implements SubmodelElement{
+	metaId: ID! @id
+	statement: [SubmodelElement!]
+	entityType: EntityType!
+	globalAssetId: String
+	specificAssetId: [SpecificAssetId!]
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type EventElement implements SubmodelElement{
+	metaId: ID! @id
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type BasicEventElement implements SubmodelElement{
+	metaId: ID! @id
+	observed: Reference!
+#	direction: Direction!
+	state: StateOfEvent!
+	messageTopic: String
+	messageBroker: Reference
+	lastUpdate: String
+	minInterval: String
+	maxInterval: String
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type OperationVariable implements SubmodelElement{
+	metaId: ID! @id
+	value: SubmodelElement
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
+
+type Operation implements SubmodelElement{
+	metaId: ID! @id
+	inputVariable: [OperationVariable!]
+	outputVariable: [OperationVariable!]
+	inoutputVariable: [OperationVariable!]
+	extension: [Extension!]
+	idShort: String
+	displayName: [LangStringNameType!]
+	description: [LangStringTextType!]
+	semanticId: Reference
+	supplementalSemanticId: [Reference!]
+	qualifier: [Qualifier!]
+	embeddedDataSpecification: [EmbeddedDataSpecification!]
+}
