@@ -1,20 +1,15 @@
-## AAS-connect complete Schema 
+## AAS-connect GraphQL Reference Schema 
 
-AAS-connect metadata and userdata schema for AAS specification V3.0 with AAS submodels 
+AAS-connect is a GraphQL Reference Schema for the Asset Administration Shell
+according AAS Metamodel Specification (Document IDTA 01001-3-0)
 
-aas-connect-complete-3-0.gql 
-
-
-## AAS-connect Basis Schema
-
-AAS-connect metadata and userdata schema for AAS specification V3.0 without AAS submodels 
-
-aas-connect-basis-3-0.gql 
-
-
-## AAS-connect Submodel Schemas 
-
-Submodel schemas  can be applied according demand. Submodel schemas extend the userdata schema as it is defined as part of the basis schema.
-
-aas-connect-contactinformations-1-0.gql - IDTA 02002-1-0 Submodel for Contact Information, 24 May 2022
-
+---------------------------------------------------------------------------------------------------------------
+Library: Neo4j/Neo4j GraphQL Library 
+---------------------------------------------------------------------------------------------------------------
+Specification and explanations of AAS-connet: https://www.aas-connect.com/gql-schema
+GitHub repository: https://github.com/foprs/aas-connect-schema
+---------------------------------------------------------------------------------------------------------------
+Version: 0.1.1 (Tested and modeled for some of the model elements needed for SMT "ContactInformations")
+Author: FoP Consult GmbH, Dr.-Ing. Rico Schady
+Licence: CC-BY-4.0 license
+---------------------------------------------------------------------------------------------------------------
