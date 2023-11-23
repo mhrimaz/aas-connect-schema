@@ -19,6 +19,7 @@ The following companies provide support for AAS-connect:
 
 Other repositories with software to implement AAS-connect:
 
+- [AAS Brain](https://github.com/mhrimaz/aasbrain-concept-description-repo): AAS Brain is an open-source AAS hosting solution. The Concept Description repository fully complies with REST API specificaiton and also offers GraphQL endpoint. Furthermore, it provides multi-backend option which includes Neo4j, GraphDB, Redis, and MongoDB.
 
 We are looking for partners to extend the ecosystem for AAS-connect, e.g. for the import/export of AASX packages to/from a AAS-connect GraphQL-Endpoint or for an AAS API according specification part 2.
 Please contact us!
