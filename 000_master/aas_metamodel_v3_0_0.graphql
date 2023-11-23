@@ -1,5 +1,21 @@
-# Authors: Mohammad Hossein Rimaz, Rico Schady
-# Licence: MIT
+# ===============================================================================================================
+# AAS-connect 
+# is a GraphQL Reference Schema for the Asset Administration Shell
+# according AAS Metamodel Specification 
+# IDTA specification document: IDTA 01001-3-0
+# ---------------------------------------------------------------------------------------------------------------
+# Library: None
+# ---------------------------------------------------------------------------------------------------------------
+# Specification of AAS-connet: https://www.aas-connect.com/gql-schema
+# GitHub repository: https://github.com/foprs/aas-connect-schema
+# ---------------------------------------------------------------------------------------------------------------
+# Version: beta
+# Author: FoP Consult GmbH, Dr.-Ing. Rico Schady, Mohammad Hossein Rimaz
+# Licence: CC-BY-4.0 license
+# ---------------------------------------------------------------------------------------------------------------
+# Comments:
+# - See decisions.md file
+# ---------------------------------------------------------------------------------------------------------------
 
 
 enum ReferenceTypes{
